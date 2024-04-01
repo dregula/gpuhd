@@ -7,6 +7,7 @@
  * 2017-2018 André Weißenberger
  *
  *****************************************************************************/
+#include <cstdint>
 
 #ifndef CUHD_CONSTANTS_
 #define CUHD_CONSTANTS_

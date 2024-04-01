@@ -1,0 +1,5 @@
+/bin/*.o
+/bin/*.cuo
+/bin/demo
+/lib/*.a
+/encoder/bin/*.o

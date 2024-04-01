@@ -1,9 +1,10 @@
-CUDA_INCLUDE = /usr/local/cuda-9.1/include
-CUDA_LIB = /usr/local/cuda-9.1/lib64
-ARCH = 70
+CUDA_INCLUDE = /usr/local/cuda/include
+CUDA_LIB = /usr/local/cuda/lib64
+WSL_CUDA_LIB = /usr/lib/wsl/lib
+ARCH = 86
 
 CC = g++
-NVCC = nvcc
+NVCC = /usr/local/cuda/bin/nvcc
 AR = ar
 CFLAGS = -std=c++17 -O3 -march=native -Wall -Werror
 NVCC_FLAGS = --std=c++11 -O3 -Wno-deprecated-gpu-targets $(NVCC_ARCH)
@@ -43,7 +44,7 @@ encoder:
 	$(MAKE) -C $(ENCODER)
 
 link: encoder cuhd gpu
-	$(CC) $(OBJ_FILES) $(CU_OBJ_FILES) $(ENCODER_OBJ_FILES) -L $(CUDA_LIB) -o $(OBJ_DIR)/$(EXEC_NAME) $(CUDA_LINK)
+	$(CC) $(OBJ_FILES) $(CU_OBJ_FILES) $(ENCODER_OBJ_FILES) -L $(CUDA_LIB) -L $(WSL_CUDA_LIB) -o $(OBJ_DIR)/$(EXEC_NAME) $(CUDA_LINK)
 
 $(OBJ_DIR)/%.cuo: $(SRC_DIR)/%.cu
 	$(NVCC) $(NVCC_FLAGS) -I $(INC_DIR) -c -o $@ $<
